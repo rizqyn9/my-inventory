@@ -20,11 +20,11 @@ export default defineConfig(() => {
       electron([
         {
           // main
-          entry: "electron/main.ts",
+          entry: "electron/main/index.ts",
           vite: {
             build: {
               minify: false,
-              outDir: "dist-electron",
+              outDir: "dist-electron/main",
               rollupOptions: {
                 external: Object.keys(pkg.dependencies),
               },
@@ -32,11 +32,11 @@ export default defineConfig(() => {
           },
         },
         {
-          entry: "electron/preload.ts",
+          entry: "electron/preload/index.ts",
           vite: {
             build: {
               minify: false,
-              outDir: "dist-electron",
+              outDir: "dist-electron/preload",
               rollupOptions: {
                 external: Object.keys(pkg.dependencies),
               },
@@ -47,20 +47,6 @@ export default defineConfig(() => {
           },
         },
       ]),
-      // electron({
-      //   main: {
-      //     // Shortcut of `build.lib.entry`.
-      //     entry: 'electron/main.ts',
-      //   },
-      //   preload: {
-      //     // Shortcut of `build.rollupOptions.input`.
-      //     // Preload scripts may contain Web assets, so use the `build.rollupOptions.input` instead `build.lib.entry`.
-      //     input: path.join(__dirname, 'electron/preload.ts'),
-      //   },
-      //   // Ployfill the Electron and Node.js built-in modules for Renderer process.
-      //   // See 👉 https://github.com/electron-vite/vite-plugin-electron-renderer
-      //   renderer: {},
-      // }),
       renderer(),
     ],
   }
