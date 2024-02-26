@@ -24,6 +24,6 @@ jobs:
       - run: yarn build
       - uses: actions/upload-artifact@v4
         with:
-          name: release
+          name: ${{ matrix.os }}-release
           path: release
           retention-days: 5
