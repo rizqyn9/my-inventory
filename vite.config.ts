@@ -6,6 +6,13 @@ import react from "@vitejs/plugin-react"
 import renderer from "vite-plugin-electron-renderer"
 import pkg from "./package.json"
 
+const alias = {
+  "@": path.resolve("src"),
+  "@common": path.resolve("common"),
+  "@preload": path.resolve("electron", "preload"),
+  "@main": path.resolve("electron", "main"),
+} as const
+
 // https://vitejs.dev/config/
 export default defineConfig(() => {
   rmSync(path.join(__dirname, "dist-electron"), {
@@ -15,6 +22,7 @@ export default defineConfig(() => {
 
   return {
     build: { minify: false },
+    resolve: { alias },
     plugins: [
       react(),
       electron([
@@ -29,6 +37,7 @@ export default defineConfig(() => {
                 external: Object.keys(pkg.dependencies),
               },
             },
+            resolve: { alias },
           },
         },
         {
@@ -41,6 +50,7 @@ export default defineConfig(() => {
                 external: Object.keys(pkg.dependencies),
               },
             },
+            resolve: { alias },
           },
           onstart(args) {
             args.reload()
