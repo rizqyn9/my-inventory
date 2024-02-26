@@ -6,6 +6,4 @@ declare global {
   }
 }
 
-declare module "@material-tailwind/react" {}
-
 export {}
