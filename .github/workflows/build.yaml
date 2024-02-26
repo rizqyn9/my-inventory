@@ -26,3 +26,4 @@ jobs:
         with:
           name: release
           path: release
+          retention-days: 5
